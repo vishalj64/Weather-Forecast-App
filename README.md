@@ -6,9 +6,9 @@ Screenshots
 
 <img src="./src/readme-asset/ss1.png">
 
-<img src="./src/readme-asset/ss1.png">
+<img src="./src/readme-asset/ss2.png">
 
-<img src="./src/readme-asset/ss1.png">
+<img src="./src/readme-asset/ss3.png">
 
 
 >## Tech Stack
