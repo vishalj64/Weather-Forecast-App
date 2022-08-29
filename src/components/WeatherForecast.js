@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './WeatherForecast.css';
 import dexter from '../assets/dexter.png';
-
+import config from '../config.json'
 const WeatherForecast = () => {
 
   const [inputValue, setInputValue] = useState("");
   const [data, setData] = useState(null);
   const [city, setCity] = useState("");
-  const API_KEY = "2fce26b3009e0a66de8c0a0223800869";
+
 
   // function get temp data
   const getTempData = (api, query) => {
@@ -17,7 +17,8 @@ const WeatherForecast = () => {
         return res.json();
       })
       .then((res) => {
-        setData(res.main);
+        console.log(res.sys.country)
+        setData(res);
         setCity(res.name);
         // console.log(res.main);
       })
@@ -29,7 +30,7 @@ const WeatherForecast = () => {
 
   // call use Effect for render data every search input
   useEffect(() => {
-    getTempData(API_KEY, inputValue);
+    getTempData(config.OPEN_WEATHER_API_KEY, inputValue);
   }, [inputValue]);
 
 
@@ -50,12 +51,12 @@ const WeatherForecast = () => {
 
         {!inputValue.length ? null : data ? (
           <div>
-            <p className="weather-p-city">Weather Details of City : {city}</p>
+            <p className="weather-p-city">Weather Details of City : {city}, {data.sys.country}</p>
 
             <div className="weather-information-container">
-              <p className='weather-details'>Current Temperature : {data.temp} °C</p>
-              <p className='weather-details'>Temperature Range : {data.temp_min} °C  to  {data.temp_max} °C</p>
-              <p className='weather-details'>Humidity  : {data.humidity}</p>
+              <p className='weather-details'>Current Temperature : {data.main.temp} °C</p>
+              <p className='weather-details'>Temperature Range : {data.main.temp_min} °C  to  {data.main.temp_max} °C</p>
+              <p className='weather-details'>Humidity  : {data.main.humidity}</p>
 
             </div>
           </div>
